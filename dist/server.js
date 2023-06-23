@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = require("express");
+const mongoose_1 = require("mongoose");
+const dotenv_1 = require("dotenv");
+const loginRouter = require("./routes/auth/login");
+(0, dotenv_1.config)();
+const app = express();
+const port = process.env.PORT || 3000;
+const db_url = process.env.DB_URL || "mongodb://0.0.0.0:27017/test";
+app.use(express.json());
+app.use("/api/auth", loginRouter.default);
+app.listen(port, () => console.log(`Listen On Port ${port}, url = http://localhost:${port}`));
+mongoose_1.default.connect(db_url).then(() => console.log(`DB Connected Successfully!`));
