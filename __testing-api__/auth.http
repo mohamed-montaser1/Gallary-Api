@@ -1,0 +1,24 @@
+@api = http://localhost:3000/api/auth
+
+
+POST {{api}}/login
+Content-Type: application/json
+
+{
+    "email": "mastrocoding@gmail.com",
+    "password": "asdlkfjalsdf"
+}
+###
+
+POST {{api}}/register
+Content-Type: application/json
+
+{
+    "name": "Mohamed",
+    "email": "mastrocoding@gmail.com",
+    "password": "asdlkfjalsdf"
+}
+
+###
+GET {{api}}/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hc3Ryb2NvZGluZ0BnbWFpbC5jb20iLCJzdWIiOiI2NDk1MzYxYzY0MjBkNjE1YTEwNmY4NWQiLCJpYXQiOjE2ODc1MDUzMjEsImV4cCI6MTY4ODExMDEyMX0.OSUirRiIGmoBoinx7eHyVv2cP17mKcNIhTCbykSbdj8 
