@@ -26,13 +26,15 @@ class Auth {
             if (!user) {
                 return res.status(404).json({
                     success: true,
-                    message: "Not Found User!",
+                    errorMessage: "Not Found User!",
+                    error: true,
                 });
             }
             if (!(0, bcrypt_1.compareSync)(password, user.password)) {
                 return res.json({
                     success: true,
-                    message: "Password Is Wrong!",
+                    errorMessage: "Password Is Wrong!",
+                    error: true,
                 });
             }
             let token = (0, jsonwebtoken_1.sign)({ email, sub: user._id }, process.env.SECRET_KEY, {
@@ -50,14 +52,16 @@ class Auth {
             if (name.trim() == "" || email.trim() == "" || password.trim() == "") {
                 return res.status(400).json({
                     success: true,
-                    message: "Bad Request",
+                    errorMessage: "Bad Request",
+                    error: true,
                 });
             }
             let user = yield user_model_1.default.findOne({ email });
             if (user) {
                 return res.json({
                     success: true,
-                    message: "There Is Already User With This Email",
+                    errorMessage: "There Is Already User With This Email",
+                    error: true,
                 });
             }
             let posts = [];
@@ -82,6 +86,7 @@ class Auth {
                     success: false,
                     message: "There Is An Error While Saving The User",
                     error_message: error.message,
+                    error: true,
                 });
             }
         });
@@ -94,7 +99,8 @@ class Auth {
             if (!payload) {
                 return res.json({
                     success: true,
-                    message: "Invalid Token!",
+                    errorMessage: "Invalid Token!",
+                    error: true,
                 });
             }
             let user;
